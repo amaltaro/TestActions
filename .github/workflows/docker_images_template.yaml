@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVICE_NAME: ${{inputs.wmcore_component}}
-      CERN_REGISTRY: registry.cern.ch
     steps:
       - name: Get the Ref
         id: get-ref
@@ -29,13 +28,14 @@ jobs:
       - name: Login to registry.cern.ch
         uses: docker/login-action@v2
         with:
-          registry: $CERN_REGISTRY
+          registry: registry.cern.ch
           username: ${{ secrets.cern_user }}
           password: ${{ secrets.cern_token }}
 
       - name: Build image
         env:
           PYPI_TAG: ${{steps.get-ref.outputs.tag}}
+          CERN_REGISTRY: registry.cern.ch
         run: |
           echo "Building service: ${SERVICE_NAME}, with tag: ${PYPI_TAG}"
           svn checkout https://github.com/dmwm/CMSKubernetes/trunk/docker/pypi/${SERVICE_NAME}
