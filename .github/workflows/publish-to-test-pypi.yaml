@@ -7,10 +7,13 @@ jobs:
   build_and_publish:
     name: Build and publish distribution package
     runs-on: ubuntu-latest
+    # IMPORTANT: this permission is mandatory for trusted publishing
+    # permissions:
+    #   id-token: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup python 3.8
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: "3.8"
       - name: Install pypa/build
@@ -21,9 +24,9 @@ jobs:
           --user
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
-      - name: Publish component
+      - name: Upload package distributions to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/
