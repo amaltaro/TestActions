@@ -7,9 +7,6 @@ jobs:
   build_and_publish:
     name: Build and publish distribution package
     runs-on: ubuntu-latest
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/project/example-package-amaltaro
     steps:
       - uses: actions/checkout@v3
       - name: Setup python 3.8
@@ -29,3 +26,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
