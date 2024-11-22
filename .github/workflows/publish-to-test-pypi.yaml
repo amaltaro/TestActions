@@ -35,7 +35,7 @@ jobs:
         with:
           subject-path: '${{ github.workspace }}/dist/example_package_amaltaro-*'
       - name: Upload package distributions to PyPi
-        uses: pypa/gh-action-pypi-publish@release/v1.12
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           #          user: __token__
           #          password: ${{ secrets.PYPI_TOKEN }}
