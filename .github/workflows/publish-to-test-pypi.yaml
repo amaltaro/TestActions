@@ -30,7 +30,7 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
       - name: Upload package distributions to PyPi
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@release/v1.12
         with:
           #          user: __token__
           #          password: ${{ secrets.PYPI_TOKEN }}
