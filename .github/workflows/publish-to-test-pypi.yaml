@@ -15,6 +15,7 @@ jobs:
       #      url: https://test.pypi.org/p/example-package-amaltaro
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+      attestations: write  # IMPORTANT: necessary to persist the attestation
     steps:
       - uses: actions/checkout@v4
       - name: Setup python 3.8
@@ -29,6 +30,10 @@ jobs:
           --user
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
+      - name: Attest package
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: '${{ github.workspace }}/example_package_amaltaro'
       - name: Upload package distributions to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1.12
         with:
