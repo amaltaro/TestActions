@@ -33,7 +33,7 @@ jobs:
       - name: Attest package
         uses: actions/attest-build-provenance@v1
         with:
-          subject-path: '${{ github.workspace }}/example_package_amaltaro'
+          subject-path: '${{ github.workspace }}/dist/example_package_amaltaro-*'
       - name: Upload package distributions to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1.12
         with:
